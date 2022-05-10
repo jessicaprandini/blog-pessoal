@@ -4,9 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 //transforma o objeto criado em uma tabela no banco de dados
@@ -14,11 +17,13 @@ import javax.validation.constraints.Size;
 
 // dá nome para a tabela no meu banco de dados
 @Table(name= "tb_postagem")
-public class PostagemModel {
+public class Postagem {
 	
+	// define a coluna de id como chave primaria
+	@Id 
 	
-	@Id // define a coluna de id como chave primaria
-	@GeneratedValue(strategy = GenerationType.IDENTITY)// equivalente ao auto_increment no mysql
+	// equivalente ao auto_increment no mysql
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 	
 	// define que o campo é obrigatório
@@ -30,7 +35,15 @@ public class PostagemModel {
 	
 	@NotNull
 	public String texto;
-
+	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Tema tema;
+	
+	@ManyToOne 
+	@JsonIgnoreProperties("postagem") 
+	private Usuario usuario; 
+	
 	public Long getId() {
 		return id;
 	}
@@ -54,6 +67,21 @@ public class PostagemModel {
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
-	
+
+	public Tema getTema() {
+		return tema;
+	}
+
+	public void setTema(Tema tema) {
+		this.tema = tema;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
 }
