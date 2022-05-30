@@ -1,21 +1,29 @@
 package com.generation.blogpessoal.model;
 
-//extensão de usuario, para usar no login
+/**
+ * A Classe UsuarioLogin não terá nenhuma annotation porque ela não irá gerar
+ * uma tabela no Banco de Dados.
+ * 
+ * A principal função desta classe é servir de apoio ao processo de login na
+ * api.
+ * 
+ */
+
+//extensão de usuário para usar no login
 public class UsuarioLogin {
 
 	private Long id;
-	
+
 	private String nome;
-	
+
 	private String usuario;
-	
+
 	private String senha;
-	
+
 	private String foto;
-	
+
 	private String token;
 
-	
 	public Long getId() {
 		return id;
 	}
@@ -63,7 +71,5 @@ public class UsuarioLogin {
 	public void setToken(String token) {
 		this.token = token;
 	}
-
-
 
 }

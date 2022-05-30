@@ -53,14 +53,14 @@ public class PostagemController {
 			return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(postagem));
 		}
 		
-		// Função de atualizar  
+		// Funcao de atualizar  
 		/*@PutMapping
 		public ResponseEntity <Postagem> put(@RequestBody Postagem postagem) {
 			return ResponseEntity.ok(repository.save(postagem));
 		}*/
 		
 		
-		//função de atualizar com verificação do if
+		//funcao de atualizar com verificação do if
 		@PutMapping
 		public ResponseEntity <Postagem> put(@RequestBody Postagem postagem){
 			return repository.findById(postagem.getId())
@@ -69,9 +69,8 @@ public class PostagemController {
 		}
 		
 		
-
 		
-		//verificação antes de deletar por id
+		//verificacao antes de deletar por id
 		@DeleteMapping("/{id}")
 		public ResponseEntity<?> deletePostagem(@PathVariable Long id) {
 			
@@ -83,6 +82,4 @@ public class PostagemController {
 					.orElse(ResponseEntity.notFound().build());
 		}
 
-	
 }
-

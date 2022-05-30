@@ -9,26 +9,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "tb_tema")
+@Table(name="tb_tema")
 public class Tema {
-	@Id
+	
+    @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
-	
-	@NotNull
-	public String descricao;
-	
-	// relacionamento do tipo um pra muitos (um tema para varias postagens)
-	//o cascade serve para que todas as atualizações ou deleções de um tema, afetem todas as postagens atrelhadas a ele 
-	@OneToMany(mappedBy="tema", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("tema")
-	private List<Postagem> postagem;
 
+	@NotBlank(message = "O atributo Descrição é obrigatório e não pode conter espaços em branco")
+    public String descricao;
+    
+    @OneToMany(mappedBy="tema", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("tema")
+    private List<Postagem> postagem;
+
+    /**
+	 *  Métodos Get e Set para a Collection postagem
+	 */
+    
 	public Long getId() {
 		return id;
 	}
@@ -44,7 +47,9 @@ public class Tema {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
+	/**
+	 *  Métodos Get e Set para a Collection postagem
+	 */
 	public List<Postagem> getPostagem() {
 		return postagem;
 	}
@@ -52,6 +57,6 @@ public class Tema {
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
 	}
-	
-	
+    
+            
 }
